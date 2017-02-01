@@ -1,0 +1,23 @@
+<div class="ui grid">
+  <div class="four wide column">
+    <div class="ui inverted olive vertical menu">
+      <a class="item" *ngFor="let category of categories" (click)="selectCategory(category)">{{category.name}}</a>
+      <a class="item" (click)="clearCategory('')">All</a>
+    </div>
+  </div>
+  <div class="twelve wide column">
+    <div class="ui grid">
+      <div *ngFor="let category of categories | categoryFilter:{name:selectedCategory}">
+        <div class="three wide column" *ngFor="let recipe of recipes | categoryFilter:{cat:category.name}; let i = index">
+          <img [src]="recipe.image" alt="meal-image" />
+          <h4>{{recipe.title}}</h4>
+          <p>{{recipe.cat}}</p>
+          <p>Servings: {{recipe.serving}}</p>
+          <button class="ui inverted olive button"  [routerLink]="['/detail', recipe.id]">See recipe</button>
+          <button class="ui inverted olive button"  (click)="addToShoppingList(recipe, i, category)">Add to shopping list</button>
+          <p class="infoMessage" *ngIf="i == infoMessage.index && category == infoMessage.category">{{this.recipe.title}} was added to your shopping list...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

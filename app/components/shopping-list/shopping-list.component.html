@@ -1,0 +1,21 @@
+<div class="ui grid">
+  <div class="four wide column" *ngIf="shoppingList.recipe.length > 0">
+    <h4>Picked recipes:</h4>
+    <div class="item" *ngFor="let r of shoppingList.recipe">
+      <a class="olive" [routerLink]="['/detail', r.id]">{{r.title}}</a>
+    </div>
+  </div>
+  <div class="twelve wide column">
+    <div class="ui grid">
+      <div *ngIf="shoppingList.neededIngredients.length == 0">
+        <h4>You haven't pick any recipe yet!</h4>
+      </div>
+      <div id="printList" class="ui list"  *ngIf="shoppingList.neededIngredients.length > 0">
+        <h4>Your ingredients list:</h4>
+        <div class="item" *ngFor="let neededIngredient of shoppingList.neededIngredients">-
+          {{neededIngredient.name}} {{neededIngredient.quantity}} {{neededIngredient.value}}
+        </div>
+        <a href class="print-btn" (click)="print()">Print your list <i class="print olive icon"></i></a>
+      </div>
+    </div>
+</div>

@@ -1,0 +1,32 @@
+<div class="ui grid">
+  <div *ngIf="recipe">
+    <p class="infoMessage" *ngIf="infoMessage">{{this.recipe.title}} was added to your shopping list...</p>
+    <div class="ui items">
+      <div class="item">
+        <div class="ui small image">
+          <img [src]="recipe.image" alt="meal-image" />
+          <a href class="print-btn" (click)="print()">Print recipe <i class="print olive icon"></i></a>
+        </div>
+        <div class="content">
+          <div id="printRecipe">
+            <div class="header">{{recipe.title}}</div>
+            <div class="meta">
+              <span class="price">{{recipe.cat}}</span>|
+              <span class="stay">Servings: {{recipe.serving}}</span>
+            </div>
+            <div class="description">
+              <h6>Ingredients:</h6>
+              <ul>
+                <li *ngFor="let ingredient of recipe.ingredients">{{ingredient.name}} {{ingredient.quantity}} {{ingredient.value}}</li>
+              </ul>
+              <h6>Description</h6>
+              <p>{{recipe.description}}</p>
+            </div>
+          </div>
+          <button class="ui inverted olive button"  (click)="return()">Go back</button>
+          <button class="ui inverted olive button"  (click)="addToShoppingList(recipe)">Add to shopping list</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

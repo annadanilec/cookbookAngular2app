@@ -1,0 +1,26 @@
+.items {
+  width: 100%;
+}
+ul {
+  list-style: none;
+  padding-left: 0px;
+}
+li {
+  padding-left: 10px;
+}
+.description {
+  margin-bottom: 5%;
+}
+.print-btn {
+  font-size: 16px;
+  color: #B5CC18!important;
+}
+.print-btn i {
+  padding-top: 20px;
+  font-size: 20px;
+}
+
+a.olive {
+  color: #B5CC18!important;
+  font-weight: 800;
+}

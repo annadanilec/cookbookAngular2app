@@ -1,0 +1,71 @@
+<div class="ui equal width form" [formGroup]="myForm" novalidate>
+  <h4>Add recipe</h4>
+  <p class="infoMessage" *ngIf="addMessage">Recipe was added.</p>
+  <div class="three fields">
+    <!-- cat -->
+    <div class="field">
+      <label>Category</label>
+      <select class="ui dropdown" name="cat" formControlName="cat">
+        <option *ngFor="let cat of categories" [value]="cat.value">{{cat.value}}</option>
+      </select>
+    </div>
+      <!-- title -->
+    <div class="field">
+      <label>Title</label>
+      <input type="text" formControlName="title">
+      <p *ngIf="!myForm.controls.title.valid" class="red">Title is required.</p>
+    </div>
+    <!-- servings -->
+    <div class="field">
+      <label>Servings</label>
+      <input type="number" formControlName="serving">
+      <p *ngIf="!myForm.controls.serving.valid" class="red">Servings number is required.</p>
+    </div>
+  </div>
+  <div class="one field">
+    <!-- description -->
+    <div class="field">
+      <label>Description</label>
+      <textarea formControlName="description" rows="5"></textarea>
+      <p *ngIf="!myForm.controls.description.valid" class="red">Description is required.</p>
+    </div>
+  </div>
+  <div class="one field">
+    <!-- Ingredients -->
+    <div formArrayName="ingredients">
+      <div *ngFor="let ingredients of myForm.controls.ingredients.controls; let i = index" class="ui segment">
+        <div>
+          <span>Ingredient {{i + 1}}</span>
+          <span *ngIf="myForm.controls.ingredients.controls.length > 1" (click)="removeIngredients(i)"><i class="remove icon"></i></span>
+        </div>
+        <div [formGroupName]="i">
+          <!-- name -->
+          <div>
+            <label>Name</label>
+            <input type="text" formControlName="name">
+            <p [hidden]="!myForm.controls.ingredients.controls[i].controls.name.valid" class="red">Ingredient name is required.</p>
+          </div>
+          <!-- quantity -->
+          <div>
+            <label>Quantity</label>
+            <input type="number" formControlName="quantity">
+            <p [hidden]="!myForm.controls.ingredients.controls[i].controls.quantity.valid" class="red">Ingredient quantity is required.</p>
+          </div>
+          <!-- value -->
+          <div>
+            <label>Value</label>
+            <input type="text" formControlName="value">
+            <p [hidden]="!myForm.controls.ingredients.controls[i].controls.value.valid" class="red">Ingredient quantity value is required.(Add kg or l or psc)</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ui mini olive message">
+      <a (click)="addIngredients()" style="cursor: default; color: olive;">
+        Add another ingredient <i class="plus icon"></i>
+      </a>
+    </div>
+  </div>
+  <div class="one field">
+    <button class="ui inverted olive button right" type="submit" [disabled]="!myForm.valid" (click)="add(myForm.value)">Add recipe</button>
+  </div>
